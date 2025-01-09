@@ -36,6 +36,7 @@ def main():
 
         if choice == "1":
             farm_map.view_map()
+            print ("Coordinates of the map: \nFarm House, Barn, (0, 2) \n (1, 0), (1, 1), (1, 2) \n (2, 0), (2, 1), (2, 2)")
         elif choice == "2":
             store_menu(player)
         elif choice == "3":
@@ -44,10 +45,10 @@ def main():
             player.view_seeds()
         elif choice == "5":
             crop = input("What crop do you want to plant (Corn/Wheat)? ").capitalize()
-            field_coords = tuple(map(int, input("Enter field coordinates (row, col): ").split(',')))
+            field_coords = tuple(map(int, input("Enter field coordinates (View the Map to see the Coordinates): ").split(',')))
             farm_map.plant_crop(player, crop, field_coords)
         elif choice == "6":
-            field_coords = tuple(map(int, input("Enter field coordinates (row, col): ").split(',')))
+            field_coords = tuple(map(int, input("Enter field coordinates (View the Map to see the Coordinates): ").split(',')))
             farm_map.harvest_crop(player, field_coords)
         elif choice == "7":
             print("Thanks for playing the Farming Game!")
