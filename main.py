@@ -38,7 +38,9 @@ def main():
             farm_map.view_map()
             print ("Coordinates of the map: \nFarm House, Barn, (0, 2) \n (1, 0), (1, 1), (1, 2) \n (2, 0), (2, 1), (2, 2)")
         elif choice == "2":
+            player.view_balance()
             store_menu(player)
+            
         elif choice == "3":
             player.view_balance()
         elif choice == "4":

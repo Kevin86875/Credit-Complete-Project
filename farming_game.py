@@ -10,7 +10,7 @@ class Farmer:
         print(f"Welcome, {self.name}!")
 
     def view_balance(self):
-        print(f"Your current balance is ${self.money}.")
+        print(f"\nYour current balance is ${self.money}.")
 
     def view_seeds(self):
         print("Your seed inventory:")
@@ -19,7 +19,7 @@ class Farmer:
 
 
 class FarmMap:
-    HARVEST_PRICES = {"Corn": 60, "Wheat": 40}  # Prices for harvested crops
+    HARVEST_PRICES = {"Corn": 60, "Wheat": 40, "Dirt": 1}  # Prices for harvested crops
 
     def __init__(self):
         self.map = [
@@ -40,10 +40,10 @@ class FarmMap:
 
     def plant_crop(self, farmer, crop, field_coords):
         if field_coords not in self.fields:
-            print("Invalid field selected!")
+            print("Hopefully it's somewhere on this planet. But wherever it is, ur not going to plant seeds in there.")
             return
         if self.fields[field_coords] is not None:
-            print("This field is already occupied!")
+            print("Whoa the place is already occupied! If u put it in there they will start killing each other! ")
             return
         if farmer.seeds.get(crop, 0) <= 0:
             print(f"You don't have enough {crop} seeds!")
@@ -57,19 +57,17 @@ class FarmMap:
 
     def harvest_crop(self, farmer, field_coords):
         if field_coords not in self.fields:
-            print("Invalid field selected!")
+            print("Invalid field coordinates!")
+            return
+        if self.fields[field_coords] is None:
+            print("The field is empty. Selling the dirt for $1.")
+            farmer.money += 1
             return
         crop = self.fields[field_coords]
-        if crop is None:
-            print("This field is empty! There's nothing to harvest.")
-            return
-
-        # Harvest the crop
-        profit = self.HARVEST_PRICES.get(crop, 0)
-        farmer.money += profit
+        farmer.money += self.HARVEST_PRICES.get(crop, 0)
         self.fields[field_coords] = None
         self.map[field_coords[0]][field_coords[1]] = "Field"
-        print(f"You harvested {crop} from the field at {field_coords} and earned ${profit}.")
+        print(f"You harvested {crop} and earned ${self.HARVEST_PRICES[crop]}!")
 
 def store_menu(farmer):
     store_items = [
